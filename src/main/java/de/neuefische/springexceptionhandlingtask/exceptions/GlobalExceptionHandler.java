@@ -17,4 +17,11 @@ public class GlobalExceptionHandler {
         return new ErrorMessage("NoSuchElementException: %s".formatted(ex.getMessage()));
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorMessage handleException(Exception ex) {
+        System.err.printf("%s: %s%n", ex.getClass().getSimpleName(), ex.getMessage());
+        return new ErrorMessage("%s: %s".formatted(ex.getClass().getSimpleName(), ex.getMessage()));
+    }
+
 }
